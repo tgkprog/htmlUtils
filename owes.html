@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+
+	<title>Who Owes Who How Much</title>
+
+
+
+  <meta charset="utf-8">
+  </head>
+
+<form>
+
+Paste tab seperated list of people on first line, Second line has blanace - positive means they spent more than others, negative means other spent on them (they owe)
+<br>
+<textarea id=t1 rows=3 cols=70></textarea>
+
+</form>
+
+<button onclick=calcOwes() >Calc owes</button>
+
+<br>
+<b>Result:</b>
+<div id=result>Will appear here if data is good</div>
+<br>
+<b>Parsed data for debug:</b>
+<div id=data1>Will appear here if data is good</div>
+
+<br>
+<hr>
+<script>
+function calcOwes(){
+/**
+2013 	Tushar Kapila
+If Person A: 6
+Person B: 10
+Person C: -7,5
+Person D: -8,5
+
+Then Person C pays 6 to person A.
+Person C pays 1,5 to person B.
+Person D pays 8,5 to person B.
+*/
+s = document.getElementById("t1").value
+
+ 	var line = s.split("\n")
+ 	//v = confirm("Your Data looks okay?:\n" + s)
+ 	//if(!v){ return;}
+ 	if(s.length < 2 || s.indexOf("\n") < 0){
+ 		alert("No line sep ")
+ 		return
+ 	}
+ 	people = line[0].split("\t")
+ 	spent = line[1].split("\t")
+ 	spent2 = line[1].split("\t")
+ 	if(spent.length < 2){
+ 		alert("Bad data, no spent data " + spent.length + "; 0 " + spent[0] + "; 1 " +  + spent[1])
+ 		return
+ 	}
+ 	if(people.length != spent.length){
+ 		alert("People and amounts do not tally. make sure no tabs inside names, spaces are okay")
+ 		return
+ 	}
+
+ 	sum  = 0;
+ 	data1o = document.getElementById("data1")
+ 	data1o.innerHTML = "";
+ 	for(i = 0;i < people.length; i++){
+ 		spent[i] = spent[i].trim()
+ 		spent[i] = parseFloat(spent[i])
+ 		sum += spent[i]
+ 		s = (1 + i) + " \"" + people[i] + "\" :" + spent[i] + ";<br>"
+ 		data1o.innerHTML += s;
+ 	}
+ 	if(sum > 0.2 || sum < -0.2){
+ 		v = confirm("Sum (" + sum + ")is not zero continue?")
+ 		if(!v){return;}
+ 	}
+ 	lastNeg = 0;
+ 	payDetails = new Array();
+ 	getDetails = new Array();
+ 	lastPay = 0;
+
+ 	for(i = 0;i < people.length; i++){
+ 		cnt = 0;
+ 		if(spent[i] > 0.1 && cnt < people.length){//has to take
+ 			cnt++
+ 			for(j = lastNeg; j < people.length && spent[i] > 0.1; j++){
+ 				if(spent[j] < -0.1){//has to give and has balance to give
+ 					lastNeg = j;
+ 					abs1 = spent[j] * -1;//can use absolute fn
+ 					maxPay = abs1
+ 					if(maxPay > spent[i]){
+ 						toPay =  spent[i];
+ 					}else{
+ 						toPay = abs1
+ 					}
+ 					spent[i] -= toPay
+ 					spent[j] += toPay
+ 					payDetails[lastPay] = people[j] + " pays " + toPay + " to " + people[i]
+ 					getDetails[lastPay] = people[i] + " gets  " + toPay + " from " + people[j]
+ 					lastPay++;
+ 				}
+ 			}
+ 		}
+ 	}
+ 	s = ""
+ 	s2 = ""
+ 	for(i = 0;i < lastPay; i++){
+ 		s = s + payDetails[i] + "<br>"
+ 		s2 = s2 + getDetails[i] + "<br>"
+ 	}
+ 	document.getElementById("result").innerHTML = s + "<br>" + s2
+}
+
+</script>
+<br>Sample input 1
+<br><pre>
+a	b	c	d
+6	10	-7.5	-8.5
+</pre>
+
+<br>Sample input 2
+<pre>
+Anna Dan	Bobby Scareface	Colly	Doc	Egg face
+-6	10	-7.3	-8.33	11.67
+</pre>
+<br>
+Tushar Kapila 2013 <a href=http://sel2in.com/>home</a>
