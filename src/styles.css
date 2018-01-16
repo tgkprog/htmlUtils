@@ -1,0 +1,71 @@
+/* Master Styles */
+body {
+  margin: 2em;
+  background-color: #F2F2F2;
+}
+hr{
+  border: 1px solid #ccc;
+}
+
+body{ 
+  font-family: Cambria, Georgia;
+  /*padding-top: 70px;*/
+}
+
+
+/* . . . */
+
+
+/* everywhere else */
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.navbar-default {
+  background-color: #108FC6;
+ }
+ .navbar-default .navbar-brand {
+    color: #ffffff;
+}
+
+.customStyle{
+   background-color: #108FC6;
+   color: #ffffff;
+   border-radius: 2px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #ffffff;
+    line-height: -17px;
+    outline-width: 31px;
+    padding-left: 46px;
+}
+
+.marginTop20px{
+   margin-top: 20px;
+}
+
+.footerMargin{
+  margin: auto;
+}
+
+.customGraphDisplay{
+  padding: 2%;
+}
+
+svg[style] {
+    height: 450px !important;
+}
+.padding20px{
+  padding: 20px;
+}
+
+/*.nav {
+    padding-left: 8px;
+    line-height: 22px;
+}*/
+/* not required when the real application names comes*/
+/*.nav-pills>li>a {
+    border-bottom: 0;
+    width: 200px;
+}*/
