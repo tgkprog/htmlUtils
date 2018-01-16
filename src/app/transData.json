@@ -1,0 +1,14 @@
+[
+{
+"id": "2",
+"type" : "Error",
+"app_id" :"PG",
+"app_sub_id" : "BankSwitch",
+"node_id" : "n4", "date_time_sdf" : "2017-11-18-198423.893 UST",
+"m_app_user_id" : "userB", "app_module" : "BankSwitch",
+"m_app_function_name" : "sendReq", "line_number" :"33",
+ "stackFull" :"at com.syn1.appV.BookService.listBooks()\nat com.syn1.appV.BookService$$FastClassByCGLIB$$e7645040.invoke()\nat net.sf.cglib.proxy.MethodProxy.invoke()\nat org.springframework.aop.framework.Cglib2AopProxy$CglibMethodInvocation.invokeJoinpoint()\nat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed()\nat org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed()\nat com.syn1.appV.LoggingAspect.logging()\nat sun.reflect.NativeMethodAccessorImpl.invoke0()\nat sun.reflect.NativeMethodAccessorImpl.invoke()\nat sun.reflect.DelegatingMethodAccessorImpl.invoke()\nat java.lang.reflect.Method.invoke()\nat org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs()\nat org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod()\nat org.springframework.aop.aspectj.AspectJAroundAdvice.invoke()\nat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed()\nat org.springframework.aop.interceptor.AbstractTraceInterceptor.invoke()\nat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed()\nat org.springframework.transaction.interceptor.TransactionInterceptor.invoke()\nat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed()\nat org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke()\nat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed()\nat org.springframework.aop.framework.Cglib2AopProxy$DynamicAdvisedInterceptor.intercept()\nat com.syn1.appV.BookService$$EnhancerByCGLIB$$7cb147e4.listBooks()\nat com.syn1.appV.web.BookController.listBooks()",  
+"stackFiltered" :"at com.syn1.appV.BookService.listBooks()\nat com.syn1.appV.BookService$$EnhancerByCGLIB$$7cb147e4.listBooks()\nat com.syn1.appV.web.BookController.listBooks()",
+ "shortDes" :"timeout connecting to bank \nIP 192.168.43.12 port 56",  "Desc" :"time out 5000 mlli seconds\nSet connect timeout.\n3 tries done\nIP 192.168.43.12 port 56\n"
+ }
+]

@@ -1,0 +1,52 @@
+.logo{
+    height:30px; 
+    display: inline;
+    margin-top: -5px;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 138px;
+    background-color: #108FC6;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px 0;
+    margin-top: 1px;
+    margin-left: 2px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 20;
+}
+.dropDown {
+    width: 138px;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 0px;
+    margin-left: 15px;
+    display: inline-grid;
+
+    position: absolute;
+    z-index: 20;
+}
+.dropDown span:hover{
+    font-weight: bold;
+}
+.dropDown span {
+    height: 22px;
+    background-color: #108FC6;
+    margin: 1px 2px;
+}
+
+#tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+#tooltip{
+    cursor: pointer;
+}
+

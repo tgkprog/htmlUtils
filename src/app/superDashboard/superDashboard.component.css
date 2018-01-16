@@ -1,0 +1,53 @@
+#masterTable{
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+#masterTable tr{
+    background-color: #108FC6;
+    color: white;
+    margin: 5px 0px;
+    cursor: pointer;
+}
+#masterTable td{
+    text-align:center;
+    padding: 12px;
+}
+thead{
+    font-weight: bold;
+}
+tbody td{
+    font-weight: bold;
+    box-shadow: 1px 2px 5px #999;
+    border-radius: 5px;
+}
+tbody td:not(:first-child){
+    border: 5px solid;
+    border-radius: 25px;
+    width: 20%;
+}
+td:first-child{
+    width: 40%;
+}
+.tooltiptext {
+    /*visibility: hidden;*/
+    width: 150px;
+    background-color: #108FC6;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px 0;
+    margin-top: -120px;
+    margin-left: -180px;
+    box-shadow: 1px 2px 5px #333;
+    border: 2px dashed #eee;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 20;
+}
+
+/*#masterTable:hover .tooltiptext {
+    visibility: visible;
+}*/

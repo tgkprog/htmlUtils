@@ -1,0 +1,87 @@
+[{
+    "appName":"FA",
+    "values":[
+        {
+            "key": "Sales",
+            "y": 4
+        },
+        {
+            "key": "Purchases",
+            "y": 5
+        },
+        {
+            "key": "Payments",
+            "y": 3
+        },
+        {
+            "key": "Deposits",
+            "y": 1
+        },
+        {
+            "key": "Withdrawls",
+            "y": 2
+        },
+        {
+            "key": "Funds Transfer",
+            "y": 9
+        }
+    ]
+},
+{
+    "appName":"Portfolio",
+    "values":[
+        {
+            "key": "Sales",
+            "y": 3
+        },
+        {
+            "key": "Purchases",
+            "y": 5
+        },
+        {
+            "key": "Payments",
+            "y": 6
+        },
+        {
+            "key": "Deposits",
+            "y": 5
+        },
+        {
+            "key": "Withdrawls",
+            "y": 3
+        },
+        {
+            "key": "Funds Transfer",
+            "y": 2
+        }
+    ]
+},
+{
+    "appName":"Fee Schedule",
+    "values":[
+        {
+            "key": "Sales",
+            "y": 4
+        },
+        {
+            "key": "Purchases",
+            "y": 4
+        },
+        {
+            "key": "Payments",
+            "y": 4
+        },
+        {
+            "key": "Deposits",
+            "y": 4
+        },
+        {
+            "key": "Withdrawls",
+            "y": 4
+        },
+        {
+            "key": "Funds Transfer",
+            "y": 4
+        }
+    ]
+}]

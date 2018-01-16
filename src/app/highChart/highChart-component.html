@@ -1,0 +1,19 @@
+<div class="row">
+		
+		<div class="col-md-5 customGraph col-md-offset-1">
+            <div id="container1" [chart]="userChart"></div>
+		</div>
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<div id="container2" [chart]="transChart"></div>
+		</div>
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<div id="container3" [chart]="failedTransChart"></div>
+		</div>
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<div id="container4" [chart]="transPieChart"></div>
+		</div>
+		<app-dialog [(visible)]="showDialog" [data]="failedTransDetails">
+			<!--<h1>Hello World</h1>-->
+			<!--<button (click)="showDialog = !showDialog" class="btn">Close</button>-->
+		</app-dialog>
+	</div>

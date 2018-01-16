@@ -1,0 +1,6 @@
+[
+    {"appName":"app1","perf":"#FFA000","events":"#00cc00","metrics":"#00cc00"},
+    {"appName":"app2","perf":"#00cc00","events":"#FFA000","metrics":"#FFA000"},
+    {"appName":"app3","perf":"#ee2222","events":"#FFA000","metrics":"#ee2222"},
+    {"appName":"app4","perf":"#00cc00","events":"#00cc00","metrics":"#00cc00"}
+]

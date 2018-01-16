@@ -1,0 +1,42 @@
+
+<div>
+	<ul class="nav nav-pills nav-justified" style="position: fixed; z-index: 10; margin-top:60px;" (click)="appChanged($event)">
+		 <li role="presentation"><a routerLink="/app1/FA" class="btn btn-primary customStyle"><strong>FA</strong></a></li>
+		 <li role="presentation"><a routerLink="/app2/Portfolio" class="btn btn-primary customStyle"><strong>Portfolio</strong></a></li>
+		 <li role="presentation"><a routerLink="/app3/Fee Schedule" class="btn btn-primary customStyle"><strong>Fee Schedule</strong></a></li>
+		 <li role="presentation"><a routerLink="/app4/app4" class="btn btn-primary customStyle"><strong>App4</strong></a></li>
+		 <li role="presentation"><a routerLink="/app4/app5" class="btn btn-primary customStyle"><strong>App5</strong></a></li>
+		 <li role="presentation"><a routerLink="/app4/app6" class="btn btn-primary customStyle"><strong>App6</strong></a></li>
+		 <li role="presentation"><a routerLink="/app4/app6" class="btn btn-primary customStyle"><strong>App7</strong></a></li>
+		 <li class="dropdown">
+			<a class=" btn btn-primary dropdown-toggle customStyle" data-toggle="dropdown" href="#"><strong>More</strong>
+			<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+			<li role="presentation"><a routerLink="/app1/FA" class="btn btn-primary customStyle"><strong>App8</strong></a></li>
+			<li role="presentation"><a routerLink="/app1/FA" class="btn btn-primary customStyle"><strong>App9</strong></a></li>
+			<li role="presentation"><a routerLink="/app1/FA" class="btn btn-primary customStyle"><strong>App10</strong></a></li>
+			</ul>
+		</li>
+		<li>
+			<form>
+				<input type="text" name="search" placeholder="Search.." id="myInput">
+			</form>
+		</li>
+	</ul>
+	<br>
+	<!--<button *ngFor="let apps of applications" class="btn btn-primary btnCustom" routerLink="/applications">{{apps.appId}}</button>-->
+	<div style="margin-top:90px;">
+	<div class="col-md-12">  
+		<div class="col-md-2 appName"><strong>{{applName}} </strong>  </div>
+		<div class="col-md-2 zonedate">
+			<strong>	Date Time and Zone <br>{{zonedate | date:'EEEE, MMM dd yyyy hh:mm Z'}} </strong>
+		</div>
+		<div class="col-md-2 appData curUsers"><span><strong>Users: {{this.curUsers}}</strong></span></div>
+		<div class="col-md-2 appData trans" ><span><strong>Transactions: {{this.transactions}}</strong> <strong> at: {{this.timestamp| date:'hh:mm a'}}</strong></span></div>
+		<div class="col-md-2 appData failedTrans"><span><strong>Failed Transactions: {{this.failedTrans}}</strong></span></div>
+		
+	</div>
+<router-outlet></router-outlet>
+	</div>
+</div>
+

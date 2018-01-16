@@ -1,0 +1,75 @@
+.zonedate {
+    background-color: #108FC6;
+    color: #ffffff;
+    border-radius: 3px;
+    text-align: center;
+    margin:5px;
+    margin-left: 18%;
+}
+
+.nav-pills>li>a {
+    border-bottom: 0;
+   
+   
+}
+.nav-pills>li>a:hover, .nav-pills>li>a:active, .nav-pills>li>a:focus,.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+    background-color: navy;
+}
+
+#myInput {
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-image: url(./app/applications/searchicon1.png);
+    background-position: 5px 10px;
+    background-repeat: no-repeat;
+    padding: 10px 2px 8px 34px;
+    margin-right: -30px;
+}
+
+.dropdown-menu{
+    width:100%;
+    background-color: #F2F2F2;
+}
+.dropdown-menu>li{
+    padding: 1px;
+}
+.dropdown-menu>li>a{
+    color: #ffffff;
+    padding: 6px 12px;
+}
+.appData{
+    padding: 7px;
+    border: 1px solid black;
+    border-radius: 7px;
+    height: 40px;
+    margin:5px 20px;
+    box-shadow: 1px 1px 3px 0px;
+}
+.curUsers{
+    background-color: #add8e6;
+    border-color: #7da8f6;
+}
+.trans{
+    background-color: #90ed90;
+    border-color: #30BD30;
+}
+.failedTrans{
+    background-color: salmon;
+    border-color: red;
+}
+.appName{
+    margin: 5px 0px;
+    position: fixed;
+    z-index: 16;
+    font-size: large;
+    width: 12%;
+    border: 1px solid #2e6da4;
+    color: #2e6da4;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    background: linear-gradient(to bottom right, #108FC6, #fff);
+    box-shadow: 1px 1px 3px 0px;
+}
+    

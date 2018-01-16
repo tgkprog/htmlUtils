@@ -1,0 +1,34 @@
+<div class="row">
+<div class="col-md-12" style="padding: 15px; margin-top: 2%;">
+	<div class="col-md-10 col-md-offset-1">
+        <table id="masterTable" class="table table-bordered">
+            <thead>
+                <tr>
+                <td>App Name</td>
+                <td>Performance</td>
+                <td>Events</td>
+                <td>Metrics</td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let app of applist" (click)="redirect(app)" (mouseenter)="showTooltip=true" (mouseleave)="showTooltip=false"> 
+                    <td>{{app.appName}}</td>
+                    <td [style.background-color]="app.perf"></td>
+                    <td [style.background-color]="app.events"></td>
+                    <td [style.background-color]="app.metrics"></td>
+                </tr>
+                <span class="tooltiptext" [hidden]="!showTooltip" >Click to go to App Dashboard</span>
+            </tbody>
+        </table>
+        <!--<div class="col-md-5 customGraph col-md-offset-1">
+			<div id="container1" [chart]="app1Chart"></div>
+		</div>
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<div id="container2" [chart]="app2Chart"></div>
+		</div>
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<div id="container3" [chart]="app3Chart"></div>
+		</div>-->
+	</div>
+</div>
+</div>

@@ -1,0 +1,17 @@
+
+	<div class="row">
+		
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<nvd3 [options]="memoryGraph_options" [data]="memoryGraph_data"></nvd3>
+		</div>
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<nvd3 [options]="cpuGraph_options" [data]="cpuGraph_data"></nvd3>
+		</div>
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<nvd3 [options]="threadGraph_options" [data]="threadGraph_data" ></nvd3>
+		</div>
+		<div class="col-md-5 customGraph col-md-offset-1">
+			<nvd3 [options]="gbcGraph_options" [data]="gbcGraph_data"></nvd3>
+		</div>	
+		
+	</div>

@@ -1,0 +1,14 @@
+<div *ngIf="visible" class="dialog">
+  <h3 class="header">Issue Type: <strong>{{data[0].type}} </strong></h3>
+  <div class="subheader">App name: <strong>{{data[0].app_id}}</strong>  <br>
+   User: <strong> {{data[0].m_app_user_id}} </strong></div>
+  <div class="desc"> Application failed due to: <strong>{{data[0].shortDes}} </strong> </div>
+  <div>
+    <button class="btn btn-primary" (click)="showDetails = !showDetails">Click here for detailed description</button>
+    <div class="desc" [hidden]="!showDetails" >{{data[0].Desc}}</div>
+    <button class="btn btn-primary" (click)="showStack=!showStack">Click here for Stack trace</button>
+    <div class="desc" [hidden]="!showStack">{{data[0].stackFiltered}}</div>
+  </div>
+  <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>

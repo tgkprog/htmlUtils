@@ -1,0 +1,48 @@
+.nav-stacked>li {
+    border-bottom: 1px solid gray;
+    line-height: 33px;
+}
+
+/*#data tbody > tr:last-child > td {
+  border-bottom: 0;
+}*/
+
+.nav-pills>li>a {
+   border-bottom: 0;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: navy;
+    color: #ffffff;
+}
+.customSubMenu{
+    cursor: pointer;
+    border: 2px solid #108FC6;
+    width: 225px;
+    height: auto;
+    border-radius: 4px;
+    position: fixed;
+    text-align: center;
+    margin-top: 4%;
+}
+/*.appName{
+    width: 225px;
+    height: auto;
+    position: fixed;
+    text-align: center;
+    font-size: large;
+}*/
+.appName{
+    margin: 5px 0px;
+    position: fixed;
+    z-index: 16;
+    font-size: large;
+    width: 225px;
+    border: 1px solid #2e6da4;
+    color: #2e6da4;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    background: linear-gradient(to bottom right, #108FC6, #fff);
+    box-shadow: 1px 1px 3px 0px;
+}

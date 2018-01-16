@@ -1,0 +1,22 @@
+	<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#"><img src="./app/header/Logo.jpg" class="logo"/> <strong>Unify</strong></a>
+		    </div>
+		    <ul *ngIf="user" class="nav navbar-nav pull-right">
+					<li style="cursor: pointer;" *ngIf="multiAppAccess" (click)="showDropDown=!showDropDown"><a><strong>Switch App</strong></a>
+						<div [hidden]="!showDropDown" class="dropDown"><span [hidden]="!showDropDown" *ngFor="let app of appList" (click)="redirect(app)"> {{app}}</span></div>
+					</li>
+		      <li><a href="#"><strong>Help</strong></a></li>
+		      <li><a routerLink="aboutus"><strong>About Us</strong></a></li>
+					<li id="tooltip"><a style="border-left: 2px solid #ffffff; height: 50px; top:0;" ><span class="glyphicon glyphicon-user"></span><strong> {{this.user.username}}</strong></a>
+						<span class="tooltiptext" (click)="logout()">Logout</span>
+					</li>
+		    </ul>
+		  </div>
+			
+		</nav>
+
+
+	
+
