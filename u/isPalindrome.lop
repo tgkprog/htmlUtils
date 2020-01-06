@@ -1,0 +1,14 @@
+function isPalindrome(word)
+{
+ word = (word + "").toLowerCase();//make it a str if its not
+  var l = word.length;
+  var h = parseInt(l / 2);
+  for(var i = 0; i < h; i++){
+    var fc = word.substring(i, i + 1);
+    var nc = word.substring(l-i-1, l - i);
+    if(fc != nc)return false;
+  }
+  return true;
+}
+var word = readline()
+print(isPalindrome(word))
