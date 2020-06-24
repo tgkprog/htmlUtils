@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title> Tap to message, Create Url to message Whats app, telegram user etc</title>
+  </head>
+  <body>
+  <form name=f1>
+  <div class="container">
+ <div class="row">
+ <div class="col-bg-1"><b>Type or paste mobile number (country code too) :</b></div>
+ <div class="col-bg-2"> <input type=text name=t1 len=10 ></div>
+  <div class="col-bg-3"> &nbsp; <a href='javascript:pasteFromClip()'>Paste</a>
+    (you must grant permission to read your clipboard) OR type in text box. So you do not need to make a contact to send a quick message to someone. </div>
+ </div>
+ <div class="row">
+  <div class="col-md-1">Optional text</div>
+  <div class="col-md-2"><input type=text name=t2 len-10> </div>
+</div>
+<div class="row">
+ <div class="col-bg-2"><input type=button onclick="proc(document.forms['f1'].t1.value)" value="Go with typed"></div>
+</div>
+
+<div class="row">
+ <div class="col-bg-2" id=oo>Output here </div>
+</div>
+    
+    
+ </form>   
+ 
+<script>
+
+ async  function pasteFromClip(){ 	
+ 	/* navigator.clipboard.readText()
+	  .then(text => {
+	    console.log('Pasted content: ', text);
+    	    s = text;
+	  })
+	  .catch(err => {
+	    console.error('Failed to read clipboard contents: ', err);
+	  }); */
+ 	const text = await navigator.clipboard.readText();
+ 	proc(text); 	
+ }
+ 
+ function proc(s){
+ 	console.log('entrd content: ', s);
+ 	var nos = "0123456789";
+ 
+ 	var s2 = s;
+ 	var i = 0;
+ 	i = s2.indexOf('\n');
+ 	if(i > 0)s2 = s2.substring(0, i);
+ 	i = s2.indexOf('\r');
+ 	if(i > 0)s2 = s2.substring(0, i); 	
+ 	for(i = 0 ; i < s2.length; i++){
+ 		var cc = s2.charAt(i);
+ 		if(nos.indexOf(cc) < 0){
+			s2 = s2.substring(0, i) + s2.substring(i+1);
+		}
+	}
+
+ 	var txt = encodeURI(document.f1.t2.value);
+ 	var msgTxt = '';
+ 	if(txt.length > 0){
+ 		msgTxt = "Optional text " + txt + "<br>\n" ; 
+ 	}
+ 	var s3 = "Entered :" + s + "<br>\n" + 
+		msgTxt +
+ 	"<br>Whatsapp tap to message : <br><font size=+2><a href=\"https://api.whatsapp.com/send?phone=" + s2 + 	
+ 			"&app_absent=web&text=" + txt + "&source=https://sel2in.com/&data=&\">" + s2 + "</a></font><br> For whats app need to put country code and no other characters"
+ 			+ " example https://wa.me/9177799922 here 91 is the country code (followed by "
+ 			+ "part mobile number, usually its 10 digits long)";
+	console.log('s3: ', s3);
+	document.getElementById("oo").innerHTML = s3;
+ 	
+ }
+ 
+ </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
