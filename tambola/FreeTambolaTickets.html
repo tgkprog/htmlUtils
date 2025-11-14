@@ -1,265 +1,903 @@
 <!doctype html>
 <html lang="en">
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <title> Free Tambola tickets</title>
+    <title>Free Tambola Tickets</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { 
+        font-family: Georgia, "Times New Roman", Times, serif;
+        margin: 0;
+        padding: 20px;
+        background: #dbedff;
+        color: #3b3b3b;
+        line-height: 1.5;
+      }
+      .container { 
+        max-width: 1200px; 
+        margin: 0 auto; 
+        background: #fff;
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      h1 {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 2em;
+        font-weight: 300;
+        margin: 0 0 20px 0;
+        text-align: center;
+        color: #000;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e1e1e1;
+      }
+      .ticket { 
+        border: 1px solid #bebfb9;
+        margin: 20px auto; 
+        padding: 15px; 
+        background: #fff;
+        max-width: 500px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        border-radius: 3px;
+      }
+      .ticket h3 { 
+        margin: 0 0 15px 0; 
+        text-align: center;
+        font-size: 1.2em;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        color: #0071b3;
+      }
+      .ticket table { 
+        border-collapse: collapse; 
+        margin: 0 auto;
+        width: 100%;
+      }
+      .ticket td { 
+        width: 11%; 
+        height: 45px; 
+        border: 1px solid #c0c0c0; 
+        text-align: center; 
+        vertical-align: middle;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: normal;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        background: #fafafa;
+      }
+      .ticket td.empty { 
+        background: #e8e8e8; 
+        cursor: default; 
+      }
+      .ticket td.checked { 
+        background: #51a351; 
+        color: white; 
+      }
+      .controls { 
+        margin: 20px 0; 
+        text-align: center;
+      }
+      .controls button { 
+        margin: 5px; 
+        padding: 8px 20px; 
+        font-size: 1em;
+        border: 1px solid #e4e4e4;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: normal;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        transition: all 0.3s;
+        box-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+      }
+      .controls button:first-child {
+        background: linear-gradient(to bottom, #f47a20 0%, #ee5f00 100%);
+        color: white;
+        border-color: #d95b00;
+      }
+      .controls button:first-child:hover {
+        background: linear-gradient(to bottom, #ee6f15 0%, #dc5500 100%);
+      }
+      .controls button:last-child {
+        background: linear-gradient(to bottom, #5c9ad1 0%, #0072b9 100%);
+        color: white;
+        border-color: #00648d;
+      }
+      .controls button:last-child:hover {
+        background: linear-gradient(to bottom, #4f8fc4 0%, #0068aa 100%);
+      }
+      #status { 
+        font-size: 1.3em; 
+        font-weight: normal; 
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin: 20px 0; 
+        padding: 12px; 
+        border-radius: 3px;
+        text-align: center;
+        border: 1px solid #e0e0e0;
+      }
+      #status.ready { 
+        background: #d8ecf8; 
+        color: #0072b9; 
+        border-color: #b8d9ec;
+      }
+      #status.game-on { 
+        background: #fcf5e7; 
+        color: #c17e09; 
+        border-color: #e6d5b0;
+      }
+      .game-info {
+        text-align: center;
+        margin: 15px 0;
+        padding: 10px;
+        background: #f0f8ff;
+        border: 1px solid #b8d9ec;
+        border-radius: 3px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+      .game-info h2 {
+        margin: 0 0 5px 0;
+        font-size: 1.3em;
+        color: #0072b9;
+        font-weight: normal;
+      }
+      .timestamp {
+        text-align: center;
+        margin: 15px 0;
+        padding: 10px;
+        font-size: 0.9em;
+        color: #666;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        background: #fafafa;
+        border: 1px solid #e0e0e0;
+        border-radius: 3px;
+      }
+      .print-button {
+        text-align: center;
+        margin: 15px 0;
+      }
+      .print-button button {
+        padding: 8px 20px;
+        font-size: 1em;
+        border: 1px solid #e4e4e4;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: normal;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background: linear-gradient(to bottom, #77b259 0%, #5f9e41 100%);
+        color: white;
+        border-color: #4f8735;
+        box-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+      }
+      .print-button button:hover {
+        background: linear-gradient(to bottom, #6ea84f 0%, #549037 100%);
+      }
+      .instructions {
+        margin: 20px 0;
+        padding: 15px;
+        background: #f9f9f9;
+        border: 1px solid #d0d0d0;
+        border-radius: 3px;
+        font-size: 0.9em;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        color: #555;
+      }
+      .instructions h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.1em;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #0072b9;
+        font-weight: 500;
+      }
+      .instructions p {
+        margin: 5px 0;
+        line-height: 1.6;
+      }
+      .instructions code {
+        background: #e8e8e8;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+        color: #d63384;
+      }
+      .game-form {
+        margin: 20px 0;
+        padding: 20px;
+        background: #f0f8ff;
+        border: 1px solid #b8d9ec;
+        border-radius: 3px;
+      }
+      .game-form h3 {
+        margin: 0 0 15px 0;
+        font-size: 1.2em;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #0072b9;
+        font-weight: 500;
+      }
+      .game-form .form-group {
+        margin-bottom: 15px;
+      }
+      .game-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 0.95em;
+        color: #3b3b3b;
+        font-weight: 500;
+      }
+      .game-form input {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 1em;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        border: 1px solid #c0c0c0;
+        border-radius: 3px;
+        background: #fff;
+      }
+      .game-form input:focus {
+        outline: none;
+        border-color: #0072b9;
+        box-shadow: 0 0 3px rgba(0, 114, 185, 0.3);
+      }
+      .game-form button {
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 1em;
+        border: 1px solid #e4e4e4;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: normal;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background: linear-gradient(to bottom, #5c9ad1 0%, #0072b9 100%);
+        color: white;
+        border-color: #00648d;
+        box-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+        transition: all 0.3s;
+      }
+      .game-form button:hover {
+        background: linear-gradient(to bottom, #4f8fc4 0%, #0068aa 100%);
+      }
+      @media print {
+        .controls, .print-button, #modal-overlay, .confirm-dialog, .instructions, .game-form {
+          display: none !important;
+        }
+        body {
+          background: white;
+        }
+        .container {
+          box-shadow: none;
+          border: none;
+        }
+      }
+      
+      /* Modal Overlay */
+      #modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+      }
+      #modal-overlay.show {
+        display: block;
+      }
+      
+      /* Confirm Dialog */
+      .confirm-dialog {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 25px;
+        border-radius: 3px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        border: 1px solid #bebfb9;
+        z-index: 1000;
+        max-width: 90%;
+        width: 400px;
+      }
+      .confirm-dialog.show {
+        display: block;
+      }
+      .confirm-dialog h2 {
+        margin: 0 0 15px 0;
+        font-size: 1.5em;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        color: #000;
+        border-bottom: 1px solid #e1e1e1;
+        padding-bottom: 10px;
+      }
+      .confirm-dialog p {
+        margin: 0 0 20px 0;
+        font-size: 1em;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        color: #3b3b3b;
+        line-height: 1.5;
+      }
+      .confirm-dialog .buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+      .confirm-dialog button {
+        padding: 6px 16px;
+        font-size: 1em;
+        border: 1px solid #e4e4e4;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: normal;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        min-width: 70px;
+        box-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+      }
+      .confirm-dialog .btn-yes {
+        background: linear-gradient(to bottom, #77b259 0%, #5f9e41 100%);
+        color: white;
+        border-color: #4f8735;
+      }
+      .confirm-dialog .btn-yes:hover {
+        background: linear-gradient(to bottom, #6ea84f 0%, #549037 100%);
+      }
+      .confirm-dialog .btn-no {
+        background: linear-gradient(to bottom, #e87352 0%, #d95b43 100%);
+        color: white;
+        border-color: #c74c36;
+      }
+      .confirm-dialog .btn-no:hover {
+        background: linear-gradient(to bottom, #de6846 0%, #c75138 100%);
+      }
+      
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+        .container {
+          padding: 15px;
+        }
+        h1 {
+          font-size: 1.6em;
+        }
+        .ticket {
+          margin: 15px auto;
+          padding: 12px;
+        }
+        .ticket h3 {
+          font-size: 1.1em;
+        }
+        .ticket td {
+          height: 40px;
+          font-size: 14px;
+        }
+        .controls button {
+          padding: 8px 16px;
+          font-size: 0.95em;
+          display: block;
+          width: 100%;
+          margin: 8px auto;
+          max-width: 300px;
+        }
+        #status {
+          font-size: 1.15em;
+          padding: 10px;
+        }
+        .confirm-dialog {
+          width: 320px;
+          padding: 20px;
+        }
+        .confirm-dialog h2 {
+          font-size: 1.3em;
+        }
+        .confirm-dialog p {
+          font-size: 0.95em;
+        }
+        .confirm-dialog button {
+          padding: 7px 14px;
+          font-size: 0.95em;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        body {
+          padding: 5px;
+        }
+        .container {
+          padding: 10px;
+        }
+        h1 {
+          font-size: 1.4em;
+        }
+        .ticket td {
+          height: 35px;
+          font-size: 13px;
+        }
+      }
+    </style>
   </head>
   <body>
   
   
-    <header>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">A free open source utility : Tambola tickets. Code is at <h ref=https://github.com/tgkprog/htmlUtils>Html Utils</a>
-              Get upto 3 tickets <br>
+  
+    <div id="modal-overlay"></div>
+    
+    <div id="confirm-dialog" class="confirm-dialog">
+      <h2 id="confirm-title">Confirm Action</h2>
+      <p id="confirm-message">Are you sure?</p>
+      <div class="buttons">
+        <button class="btn-no" onclick="hideConfirm()">No</button>
+        <button class="btn-yes" onclick="confirmYes()">Yes</button>
+      </div>
+    </div>
+    
+    <div class="container">
+      <h1>Free Tambola Tickets</h1>
+      
+      <div id="game-info" class="game-info"></div>
+      
+      <div class="controls">
+        <div id="status" class="ready">Ready</div>
+        <button onclick="showResetConfirm()">Reset Game</button>
+        <button onclick="showRemakeConfirm()">Re-make Tickets</button>
+      </div>
+      
+      <div id="tickets-container"></div>
+      
+      <div id="timestamp" class="timestamp"></div>
+      
+      <div class="print-button">
+        <button onclick="window.print()">Print Tickets</button>
+      </div>
+      
+      <div class="instructions">
+        <h3>How to Use URL Parameters</h3>
+        <p>You can customize your Tambola game by adding parameters to the URL:</p>
+        <p><code>?t=5&n=John&g=Diwali2025</code></p>
+        <p><strong>Parameters:</strong></p>
+        <p><code>t</code> - Number of tickets (default: 3, max: 100). Example: <code>t=5</code> creates 5 tickets</p>
+        <p><code>n</code> - Player name (default: Player1, max: 40 chars). Example: <code>n=Jane</code></p>
+        <p><code>g</code> - Game name (default: Game 1, max: 40 chars). Example: <code>g=Diwali2025</code></p>
+        <p><strong>Note:</strong> Each game name saves separately. Change the game name to start a fresh game.</p>
+        <p></p>
+        <p><b>MIT License</b></p>
+
+<p>Copyright (c) 2025</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, subject to the following conditions:</p>
+
+<p><b>1.</b> The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.<br>
+<b>2.</b> Attribution is requested (not legally required) by linking to:
+https://sel2in.com/news/prog/tambola</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+<br><br>
+<a href="https://github.com/tgkprog">Tushar Kapila on github</a>, <a href="https://stackoverflow.com/users/1643558/tgkprog">StackOverflow</a> 
+and <a href="https://www.linkedin.com/in/tusharkapila">LinkedIn</a>
+
+</p>
+
+
+      </div>
+      
+      <div class="game-form">
+        <h3>Create New Game</h3>
+        <div class="form-group">
+          <label for="form-tickets">Number of Tickets (max 100):</label>
+          <input type="number" id="form-tickets" name="tickets" min="1" max="100" value="3">
+        </div>
+        <div class="form-group">
+          <label for="form-player-name">Player Name (max 40 chars):</label>
+          <input type="text" id="form-player-name" name="playerName" maxlength="40" value="Player1">
+        </div>
+        <div class="form-group">
+          <label for="form-game-name">Game Name (max 40 chars):</label>
+          <input type="text" id="form-game-name" name="gameName" maxlength="40" value="Game 1">
+        </div>
+        <button onclick="submitGameForm()">Submit</button>
+      </div>
+    </div>
+
+    <script>
+      let gameState = {
+        tickets: 2,
+        playerName: 'Player1',
+        gameName: 'Game 1',
+        gameOn: false,
+        ticketData: [],
+        createdAt: null
+      };
+      
+      let confirmCallback = null;
+
+      function showConfirm(title, message, callback) {
+        document.getElementById('confirm-title').textContent = title;
+        document.getElementById('confirm-message').textContent = message;
+        document.getElementById('modal-overlay').className = 'show';
+        document.getElementById('confirm-dialog').className = 'confirm-dialog show';
+        confirmCallback = callback;
+      }
+
+      function hideConfirm() {
+        document.getElementById('modal-overlay').className = '';
+        document.getElementById('confirm-dialog').className = 'confirm-dialog';
+        // Don't clear callback here - it's cleared in confirmYes after execution
+      }
+
+      function confirmYes() {
+        console.log('confirmYes called, callback:', confirmCallback);
+        const callback = confirmCallback;
+        confirmCallback = null; // Clear it now
+        hideConfirm();
+        if (callback) {
+          callback();
+        }
+      }
+
+      function showResetConfirm() {
+        console.log('showResetConfirm called');
+        showConfirm(
+          'Reset Game',
+          'Are you sure you want to reset all checked numbers?',
+          resetGame
+        );
+      }
+
+      function showRemakeConfirm() {
+        console.log('showRemakeConfirm called, gameOn:', gameState.gameOn);
+        if (gameState.gameOn) {
+          showConfirm(
+            'Re-make Tickets',
+            'Game is in progress! Are you sure you want to create new tickets? All progress will be lost.',
+            remakeTicketsFromParams
+          );
+        } else {
+          remakeTicketsFromParams();
+        }
+      }
+      
+      function remakeTicketsFromParams() {
+        const params = getURLParams();
+        console.log('Remake with params:', params);
+        gameState.tickets = parseInt(params.t);
+        gameState.playerName = params.n;
+        gameState.gameName = params.g;
+        console.log('Updated gameState:', gameState);
+        createNewTickets();
+      }
+
+      function getURLParams() {
+        const params = new URLSearchParams(window.location.search);
+        
+        // Get and validate ticket count (max 100)
+        let ticketCount = parseInt(params.get('t')) || 3;
+        if (ticketCount > 100) {
+          ticketCount = 100; // Maximum 100 tickets allowed
+        }
+        if (ticketCount < 1) {
+          ticketCount = 1;
+        }
+        
+        // Get and validate player name (max 40 chars)
+        let playerName = params.get('n') || 'Player1';
+        if (playerName.length > 40) {
+          playerName = playerName.substring(0, 40); // Truncate to 40 characters
+        }
+        
+        // Get and validate game name (max 40 chars)
+        let gameName = params.get('g') || 'Game 1';
+        if (gameName.length > 40) {
+          gameName = gameName.substring(0, 40); // Truncate to 40 characters
+        }
+        
+        return {
+          t: ticketCount.toString(),
+          n: playerName,
+          g: gameName
+        };
+      }
+      
+      function formatDateTime(timestamp) {
+        const date = new Date(timestamp);
+        const options = {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          timeZoneName: 'long'
+        };
+        return date.toLocaleString('en-US', options);
+      }
+      
+      function updateGameInfo() {
+        const gameInfoDiv = document.getElementById('game-info');
+        gameInfoDiv.innerHTML = `<h2>${gameState.gameName}</h2>`;
+      }
+      
+      function updateTimestamp() {
+        const timestampDiv = document.getElementById('timestamp');
+        if (gameState.createdAt) {
+          timestampDiv.textContent = `Created: ${formatDateTime(gameState.createdAt)}`;
+        }
+      }
+
+      function generateTambolaTicket() {
+        const ticket = Array(3).fill(null).map(() => Array(9).fill(0));
+        
+        // Each row has exactly 5 numbers
+        for (let row = 0; row < 3; row++) {
+          const positions = [];
+          while (positions.length < 5) {
+            const col = Math.floor(Math.random() * 9);
+            if (!positions.includes(col)) positions.push(col);
+          }
+          positions.sort((a, b) => a - b);
+          
+          for (let col of positions) {
+            let num;
+            if (col === 0) {
+              num = Math.floor(Math.random() * 9) + 1;
+            } else if (col === 8) {
+              num = Math.floor(Math.random() * 10) + 81;
+            } else {
+              num = Math.floor(Math.random() * 10) + (col * 10);
+            }
+            ticket[row][col] = num;
+          }
+        }
+        
+        return ticket;
+      }
+
+      function renderTickets() {
+        const container = document.getElementById('tickets-container');
+        // Force complete DOM clear
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        
+        console.log('Rendering tickets, gameState:', JSON.stringify(gameState.ticketData.map(t => ({checked: t.checked}))));
+        
+        gameState.ticketData.forEach((ticket, ticketIdx) => {
+          const ticketDiv = document.createElement('div');
+          ticketDiv.className = 'ticket';
+          
+          const title = document.createElement('h3');
+          title.textContent = `${gameState.playerName} - Ticket ${ticketIdx + 1}`;
+          ticketDiv.appendChild(title);
+          
+          const table = document.createElement('table');
+          
+          ticket.grid.forEach((row, rowIdx) => {
+            const tr = document.createElement('tr');
+            row.forEach((cell, colIdx) => {
+              const td = document.createElement('td');
+              const cellKey = `${ticketIdx}-${rowIdx}-${colIdx}`;
               
-              This page supports three get params on adress bar - t for number of tickets, n for name and g for game name. Show local time upto seconds as an option (in case user print screen to prove who won first), but it can be hidden or accuracy reduced to minutes or every 5 seconds to be less distracting.  
-              </p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
-              <ul class="list-unstyled">
-                <li><a href="https://sel2in.com/" class="text-white">Sel2in.com</a></li>
-                <li><a href="https://twitter.com/tushar_kapila" class="text-white">Tushar Twitter</a></li>
-                <li><a href="https://www.facebook.com/Sel2inCom-102255914881700" class="text-white">Sel2in Facebook</a></li>
-                <li><a href="https://m.me/102255914881700" class="text-white">Sel2in Fb messenger</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="https://sel2in.com" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-	        <circle cx="6" cy="9" r="2" stroke="red" ></circle>
-	        <circle cx="27" cy="9" r="2" stroke="red" ></circle>
-            <!-- <path d="M 10 20 C 20 15, 35 35, 50 20" stroke="purple" /> -->
-            <path d="M 3 27 Q 14 34, 31 28" stroke="purple" />
-		 </svg>
-	 <img src='s2nlogoA.png'> &nbsp;
+              if (cell === 0) {
+                td.className = 'empty';
+              } else {
+                td.textContent = cell;
+                td.onclick = () => toggleCell(ticketIdx, rowIdx, colIdx);
+                
+                // Check if this cell is marked as checked
+                const isChecked = ticket.checked && ticket.checked[cellKey] === true;
+                if (isChecked) {
+                  td.className = 'checked';
+                  console.log('Cell checked:', cellKey);
+                }
+              }
+              
+              tr.appendChild(td);
+            });
+            table.appendChild(tr);
+          });
+          
+          ticketDiv.appendChild(table);
+          container.appendChild(ticketDiv);
+        });
+        
+        updateGameInfo();
+        updateTimestamp();
+      }
 
-            <strong>Url Tap Message</strong>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </div>
-    </header>
-    
-     <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Tap to chat</h1>
-            <p> &nbsp;       </p>
-        </div>
-      </section>
-    
-  <form name=f1>
-  <div class="container">
- <div class="row">
- <div class="col-bg-1">
- <span>Sel2in Tambola Ticket 1</span>
- <table class="table table-striped" id ="tt1main">
-  <thead class="thead-light">
-   <tr>
-      <th scope="col" colspan=10>Sel2in Tambola Ticket 1</th>
-                       
-    </tr>  
-    <tr>
-      <th scope="col">A</th>
-      <th scope="col">B</th>
-      <th scope="col">C</th>
-      <th scope="col">D</th>
-      <th scope="col">E</th>      
-      <th scope="col">F</th>      
-      <th scope="col">G</th>
-      <th scope="col">H</th>      
-      <th scope="col">I</th>            
-      <th scope="col">J</th>                  
-    </tr>
-  </thead>
-  <tbody id=tt1body>
-    <tr id="tt1r1">
- 
-      <td>r1c1</td>
-      <td>r1c2</td>
-      <td>a</td>
-      <td>b</td>
-      <td>b</td>
-      <td>h</td>
-      <td>n</td>
-      <td></td>
-      <td></td>
-      <td>r1c10</td>            
-                                    
-    </tr>
-   <tr id="tt1r2">
- 
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>            
-                                    
-    </tr>
-    
-   <tr id="tt1r3">
- 
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>            
-                                    
-    </tr>    
-  </tbody>
-</table>
- </div>
- <div class="col-bg-2"> </div>
-  <div class="col-bg-3"> &nbsp; Or <a role="button" href='javascript:pasteFromClip()'>Paste</a> number in clipboard
-    (you must grant permission to read your clipboard). Tap link below to send them a message. Now you do not need to make a contact to send a quick message to someone. </div>
- </div>
- <div class="row">
-  <div class="col-md-1">Optional text</div>
-  <div class="col-md-2"><textarea rows=5 cols=110 name=t2 ></textarea>             </div>
-</div>
-<div class="row">
- <div class="col-bg-2"><input class="btn btn-default" type=button onclick="proc(document.forms['f1'].t1.value)" value="[ Go ]"></div>
-</div>
-<br>
-<div class="row">
- <div class="col-bg-2" id=oo>Output here </div>
-</div>
-    
-    
- </form>   
- 
- <div class="footer">Version 1.2.003.
- </div>
-<script>
+      function toggleCell(ticketIdx, rowIdx, colIdx) {
+        const cellKey = `${ticketIdx}-${rowIdx}-${colIdx}`;
+        const ticket = gameState.ticketData[ticketIdx];
+        
+        if (!gameState.gameOn) {
+          gameState.gameOn = true;
+          updateStatus(); // Update to "Game On"
+        }
+        
+        // Ensure checked object exists
+        if (!ticket.checked) {
+          ticket.checked = {};
+        }
+        
+        ticket.checked[cellKey] = !ticket.checked[cellKey];
+        saveState();
+        renderTickets();
+      }
 
- async  function pasteFromClip(){ 	
- 	/* navigator.clipboard.readText()
-	  .then(text => {
-	    console.log('Pasted content: ', text);
-    	    s = text;
-	  })
-	  .catch(err => {
-	    console.error('Failed to read clipboard contents: ', err);
-	  }); */
- 	const text = await navigator.clipboard.readText();
- 	proc(text); 	
- }
- 
- function proc(s){
- 	console.log('entrd content: ', s);
- 	var nos = "0123456789";
- 	var tbl1 = document.getElementById("tt1main");//tt1r1, tt1body
- 	var tbl = tbl1;
- 	var s2 = s;
- 	var i = 0;
- 	var s4 = '', s5 = '';
- 	//i = s2.indexOf('\n');
- 	//if(i > 0)s2 = s2.substring(0, i);
- 	//i = s2.indexOf('\r');
- 	//if(i > 0)s2 = s2.substring(0, i); 
- 	//var ln = s2.length;	
- 	i = 0;
- 	//var chldrn  = row1.childNodes;
- 	//var ln = chldrn.length;
- 	for (var i = 0, row; row = tbl.rows[i]; i++) {
- 		var cnt = 0;
- 		if(i >= 2){ 	
-		 	for( var j = 0, col ; col =  row.cells[j]; j++){
- 				console.log(' r' , i, ' c: ', j, ' [' + col.innerHTML + ']');
-			}
-		}
-	}
-	if(s2 == ''){
-		s3 = "<Strong><font color=red size=+2>No number found</font></strong>";
-	}else{
-	 	var txt = encodeURI(document.f1.t2.value);
-	 	var msgTxt = '';
-	 	if(txt.length > 0){
-	 		msgTxt = "Optional text " + txt + "<br>\n" ; 
-	 	}
-	 	var s3 = "Entered :" + s + "<br>\n" + 
-			msgTxt +
-	 	"<br>Tap to Whatsapp message : <br><font size=+2><a href=\"https://wa.me/" + s2
-	 	+ "?app_absent=web&text=" + txt + "&source=https://sel2in.com/&data=&\">" + s2 + 
-	 	"</a>"
-	 	
-	 	+ " OR <a href=\"https://api.whatsapp.com/send?phone=" + s2 + 	
-	 			"&app_absent=web&text=" + txt + "&source=https://sel2in.com/&data=&\">" 		
-	 			+ s2 + "</a></font> (click)<br> For whats app need to put country code and no other characters"
-	 			+ " example https://wa.me/9177799922 here 91 is the country code (followed by "
-	 			+ "part mobile number, usually its 10 digits long)";
-	 }
-	console.log('s3: ', s3);
-	//document.getElementById("oo").innerHTML = s3;
- 	
- }
- 
- function  load(){
+      function updateStatus(customMessage) {
+        const statusDiv = document.getElementById('status');
+        if (customMessage) {
+          statusDiv.textContent = customMessage;
+          statusDiv.className = customMessage.includes('Restored') ? 'game-on' : (customMessage.includes('Fresh') ? 'ready' : 'ready');
+        } else if (gameState.gameOn) {
+          statusDiv.textContent = 'Game On';
+          statusDiv.className = 'game-on';
+        } else {
+          statusDiv.textContent = 'Ready';
+          statusDiv.className = 'ready';
+        }
+      }
 
- 	var p =getParams(window.location.href);
- 	var n = '';
- 	var t = '';
- 	if('n' in p){
-		n = p['n'];
-	}
-	if('t' in p){
- 	 t = p['t'];
- 	}
- 	if(t != '')document.f1.t2.value = t;
- 	if(n != ''){
- 		document.f1.t1.value = n;
- 		 	
- 	}
- 	proc(n);
+      function saveState() {
+        const storageKey = `tambola_${gameState.gameName}`;
+        localStorage.setItem(storageKey, JSON.stringify(gameState));
+      }
 
- }
-var getParams = function (url) {
-	var params = {};
-	var parser = document.createElement('a');
-	parser.href = url;
-	var query = parser.search.substring(1);
-	var vars = query.split('&');
-	for (var i = 0; i < vars.length; i++) {
-		var pair = vars[i].split('=');
-		params[pair[0]] = decodeURIComponent(pair[1]);
-	}
-	return params;
-};
- load();
- </script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+      function loadState() {
+        const params = getURLParams();
+        const storageKey = `tambola_${params.g}`;
+        const saved = localStorage.getItem(storageKey);
+        
+        if (saved) {
+          try {
+            const savedState = JSON.parse(saved);
+            
+            // Validate saved state has required structure
+            if (!savedState.ticketData || !Array.isArray(savedState.ticketData) || savedState.ticketData.length === 0) {
+              throw new Error('Invalid ticket data structure');
+            }
+            
+            // Validate each ticket has grid and checked
+            for (let ticket of savedState.ticketData) {
+              if (!ticket.grid || !Array.isArray(ticket.grid) || ticket.grid.length !== 3) {
+                throw new Error('Invalid ticket grid structure');
+              }
+              if (!ticket.checked || typeof ticket.checked !== 'object') {
+                ticket.checked = {}; // Fix missing checked object
+              }
+            }
+            
+            // Check if there's actual game progress
+            const hasProgress = savedState.gameOn || savedState.ticketData.some(t => t.checked && Object.keys(t.checked).length > 0);
+            
+            if (hasProgress) {
+              // Restore the saved game
+              gameState = savedState;
+              updateStatus('Restored previous game');
+              renderTickets();
+              console.log('Restored previous game from localStorage');
+              return;
+            }
+          } catch (error) {
+            console.error('Error loading saved state:', error);
+            // Clear corrupted data
+            localStorage.removeItem(storageKey);
+            // Fall through to create fresh game
+          }
+        }
+        
+        // No saved state, corrupted data, or no progress - use URL params
+        gameState.tickets = parseInt(params.t);
+        gameState.playerName = params.n;
+        gameState.gameName = params.g;
+        createNewTickets('Fresh game');
+      }
+
+      function createNewTickets(statusMessage) {
+        console.log('Creating new tickets, count:', gameState.tickets);
+        gameState.ticketData = [];
+        gameState.gameOn = false;
+        gameState.createdAt = new Date().toISOString();
+        
+        for (let i = 0; i < gameState.tickets; i++) {
+          gameState.ticketData.push({
+            grid: generateTambolaTicket(),
+            checked: {}
+          });
+        }
+        
+        console.log('New tickets created:', gameState.ticketData.length);
+        if (statusMessage) {
+          updateStatus(statusMessage);
+        } else {
+          updateStatus();
+        }
+        saveState();
+        renderTickets();
+      }
+
+      function resetGame() {
+        console.log('Reset called, before:', JSON.stringify(gameState.ticketData.map(t => t.checked)));
+        // Clear all checked states by creating new empty objects
+        for (let i = 0; i < gameState.ticketData.length; i++) {
+          gameState.ticketData[i].checked = {};
+        }
+        gameState.gameOn = false;
+        console.log('Reset called, after:', JSON.stringify(gameState.ticketData.map(t => t.checked)));
+        updateStatus(); // Update to "Ready"
+        saveState();
+        renderTickets();
+      }
+
+      function initializeForm() {
+        const params = getURLParams();
+        document.getElementById('form-tickets').value = params.t;
+        document.getElementById('form-player-name').value = params.n;
+        document.getElementById('form-game-name').value = params.g;
+      }
+
+      function submitGameForm() {
+        // Get form values
+        let tickets = parseInt(document.getElementById('form-tickets').value) || 3;
+        let playerName = document.getElementById('form-player-name').value || 'Player1';
+        let gameName = document.getElementById('form-game-name').value || 'Game 1';
+        
+        // Validate and sanitize
+        if (tickets > 100) tickets = 100;
+        if (tickets < 1) tickets = 1;
+        if (playerName.length > 40) playerName = playerName.substring(0, 40);
+        if (gameName.length > 40) gameName = gameName.substring(0, 40);
+        
+        // Update form with sanitized values
+        document.getElementById('form-tickets').value = tickets;
+        document.getElementById('form-player-name').value = playerName;
+        document.getElementById('form-game-name').value = gameName;
+        
+        // Function to actually update and remake
+        const doSubmit = () => {
+          // Clear URL parameters before creating new tickets
+          try {
+            const baseUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, baseUrl);
+          } catch (error) {
+            console.error('Failed to clear URL parameters:', error);
+            // Continue execution even if URL clearing fails
+          }
+          
+          gameState.tickets = tickets;
+          gameState.playerName = playerName;
+          gameState.gameName = gameName;
+          createNewTickets();
+        };
+        
+        // If game is on, ask for confirmation
+        if (gameState.gameOn) {
+          showConfirm(
+            'Re-make Tickets',
+            'Game is in progress! Are you sure you want to create new tickets? All progress will be lost.',
+            doSubmit
+          );
+        } else {
+          doSubmit();
+        }
+      }
+      
+      // Initialize on page load
+      window.onload = () => {
+        console.log('Page loaded, initializing...');
+        loadState();
+        initializeForm();
+      };
+    </script>
   </body>
 </html>
-
