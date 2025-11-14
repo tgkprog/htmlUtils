@@ -5,6 +5,14 @@ We will define 4 functions and use if to decide which to return based on operati
 Operand 1 <input name=op1 size=3> Operand 2 <input name=op2 size=3> 
 Operation <input name=oper size=4> Key <input name=key size=5>
 <br>
+
+<b>Memory efficiency and JavaScript engine internals</b><br>
+
+Memory Considerations:<br>
+What the JavaScript engine actually does:<br>
+Modern JavaScript engines (V8, SpiderMonkey, etc.) are smart - they only capture variables that are actually used by the closure, not all variables in scope!<br><br>
+
+
 <button value="Save" onClick="save()">Save</button>
 <br><br>
 Process key <input name=key2 size=5>
