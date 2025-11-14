@@ -1,4 +1,4 @@
-## JavaScript Closures - Learned from Working Example
+## JavaScript Closures - Learn from Working Example
 
 ### What is a Closure?
 
